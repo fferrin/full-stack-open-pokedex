@@ -32,5 +32,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "dry-everglades-43800"
           heroku_email: "facundo.ferrin@gmail.com"
+          healthcheck: "https://dry-everglades-43800.herokuapp.com/health"
+          checkstring: "ok"
       - name: deploy
         run: npm run deploy

@@ -34,5 +34,6 @@ jobs:
           heroku_email: "facundo.ferrin@gmail.com"
           healthcheck: "https://dry-everglades-43800.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
       - name: deploy
         run: npm run deploy

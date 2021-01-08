@@ -43,6 +43,7 @@ jobs:
       - name: deploy
         if: ${{ github.event_name == 'push' }}
         run: npm run deploy
+      - uses: actions/checkout@v2
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
         if: ${{ github.event_name == 'push' }}

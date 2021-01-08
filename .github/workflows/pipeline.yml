@@ -31,21 +31,21 @@ jobs:
           start: npm run start
           wait-on: http://localhost:5000
       - name: Run akhileshns/heroku-deploy@v3.8.8
-        - uses: akhileshns/heroku-deploy@v3.8.8 # This is the action
-          if: github.event_name == 'push' }}
-          with:
-            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            heroku_app_name: "dry-everglades-43800"
-            heroku_email: "facundo.ferrin@gmail.com"
-            healthcheck: "https://dry-everglades-43800.herokuapp.com/health"
-            checkstring: "ok"
-            rollbackonhealthcheckfailed: true
-        - name: deploy
-          if: ${{ github.event_name == 'push' }}
-          run: npm run deploy
-        - name: Bump version and push tag
-          uses: anothrNick/github-tag-action@1.33.0
-          if: ${{ github.event_name == 'push' }}
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            DEFAULT_BUMP: patch
+        uses: akhileshns/heroku-deploy@v3.8.8 # This is the action
+        if: github.event_name == 'push' }}
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "dry-everglades-43800"
+          heroku_email: "facundo.ferrin@gmail.com"
+          healthcheck: "https://dry-everglades-43800.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
+      - name: deploy
+        if: ${{ github.event_name == 'push' }}
+        run: npm run deploy
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.33.0
+        if: ${{ github.event_name == 'push' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch

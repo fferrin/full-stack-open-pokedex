@@ -30,7 +30,8 @@ jobs:
           command: npm run test:e2e
           start: npm run start
           wait-on: http://localhost:5000
-      if: ${{ github.event_name == 'push' }}
+      - name: Run akhileshns/heroku-deploy@v3.8.8
+        if: ${{ github.event_name == 'push' }}
         - uses: akhileshns/heroku-deploy@v3.8.8 # This is the action
           with:
             heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -40,8 +41,10 @@ jobs:
             checkstring: "ok"
             rollbackonhealthcheckfailed: true
         - name: deploy
+          if: ${{ github.event_name == 'push' }}
           run: npm run deploy
         - name: Bump version and push tag
+          if: ${{ github.event_name == 'push' }}
           uses: anothrNick/github-tag-action@1.33.0
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
